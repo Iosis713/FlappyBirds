@@ -10,6 +10,12 @@ Sprite::Sprite(sf::Vector2f position, float const width, float const height, sf:
     rectangle_.setPosition(position_);
 };
 
+void Sprite::draw(sf::RenderWindow& i_window)
+{
+    rectangle_.setPosition(position_);
+    i_window.draw(rectangle_);
+}
+
 float Sprite::getHeight() const
 {
     return this-> height_;

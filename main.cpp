@@ -3,14 +3,13 @@
 #include <thread>
 
 #include <SFML/Graphics.hpp>
-
-#include "Headers/Global.hpp"
-
+#include "Headers/Sprite.hpp"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "FlappyBirds");
 
+    Sprite testSprite(sf::Vector2f(800.f, 350.f), 50.f, 80.f, sf::Color::Yellow);
 
     while(window.isOpen())
     {
@@ -26,7 +25,7 @@ int main()
         }
         window.clear();
 
-
+        testSprite.draw(window);
         window.display();
         {
             using namespace std::chrono_literals;

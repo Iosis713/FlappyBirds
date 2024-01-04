@@ -20,8 +20,10 @@ public:
     float getHeight() const;
     float getWidth() const;
     sf::Vector2f getPosition() const;
-
+    
     void setPosition(sf::Vector2f position);
     
+    virtual void draw(sf::RenderWindow& i_window);
+
 };
 
