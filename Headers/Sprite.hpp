@@ -16,7 +16,12 @@ protected:
 
 public:
     Sprite(sf::Vector2f position, float const width, float const height, sf::Color color);
+    
+    float getHeight() const;
+    float getWidth() const;
+    sf::Vector2f getPosition() const;
+
     void setPosition(sf::Vector2f position);
-    sf::Vector2f getPosition();
+    
 };
 
