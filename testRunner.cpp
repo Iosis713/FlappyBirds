@@ -24,24 +24,93 @@ TEST_P(SpriteFixture, TestSetPosition)
     ASSERT_EQ(mSprite.getPosition(), param);
 }
 
-TEST(Sprite, getHeightTest)
+TEST_F(SpriteFixture, vertexesUpdateTest)
 {
-    Sprite mSprite{sf::Vector2f(50.f, 100.f), 20.f, 70.f, sf::Color::Red}; 
+    mSprite.updateVertexes();
 
-    ASSERT_EQ(70.f, mSprite.getHeight());
+    std::array<sf::Vector2f, 4> expectedVertexes;
+    expectedVertexes[0] = sf::Vector2f{50.f, 100.f};
+    expectedVertexes[1] = sf::Vector2f{50.f + 20.f, 100.f};
+    expectedVertexes[2] = sf::Vector2f{50.f, 100.f + 100.f};
+    expectedVertexes[3] = sf::Vector2f{50.f + 20.f, 100.f + 100.f};
+
+    ASSERT_EQ(expectedVertexes, mSprite.getVertexes());
 }
-
-TEST(Sprite, getWidthTest)
-{
-    Sprite mSprite{sf::Vector2f(50.f, 100.f), 60.f, 70.f, sf::Color::Red};
-    
-    ASSERT_EQ(60.f, mSprite.getWidth());
-}
-
 
 INSTANTIATE_TEST_CASE_P(TestingSetPosition, SpriteFixture, testing::Values(sf::Vector2f(20, 30),
                                                         sf::Vector2f(60, -10),
                                                         sf::Vector2f(-20, -30)));
+
+TEST(CollisionTest, LeftTopVertexInteracting)
+{
+    Sprite mSprite(sf::Vector2f(300.f, 300.f), 100.f, 100.f);
+    auto collider_ptr = std::make_shared<Sprite>(sf::Vector2f(200.f, 200.f), 200.f, 200.f);
+    
+    bool result = mSprite.checkCollision(collider_ptr);
+
+    ASSERT_TRUE(result);
+}
+
+TEST(CollisionTest, RightTopVertexInteracting)
+{
+    Sprite mSprite(sf::Vector2f(200.f, 200.f), 100.f, 100.f);
+    auto collider_ptr = std::make_shared<Sprite>(sf::Vector2f(200.f, 200.f), 200.f, 200.f);
+    
+    bool result = mSprite.checkCollision(collider_ptr);
+
+    ASSERT_TRUE(result);
+}
+
+TEST(CollisionTest, LeftBottomVertexInteracting)
+{
+    Sprite mSprite(sf::Vector2f(200.f, 200.f), 100.f, 100.f);
+    auto collider_ptr = std::make_shared<Sprite>(sf::Vector2f(250.f, 250.f), 70.f, 70.f);
+    
+    bool result = mSprite.checkCollision(collider_ptr);
+
+    ASSERT_TRUE(result);
+}
+
+TEST(CollisionTest, RightBottomVertexInteracting)
+{
+    Sprite mSprite(sf::Vector2f(200.f, 200.f), 100.f, 100.f);
+    auto collider_ptr = std::make_shared<Sprite>(sf::Vector2f(250.f, 250.f), 100.f, 100.f);
+    
+    bool result = mSprite.checkCollision(collider_ptr);
+
+    ASSERT_TRUE(result);
+}
+
+TEST(CollisionTest, NoInteraction)
+{
+    Sprite mSprite(sf::Vector2f(200.f, 200.f), 100.f, 100.f);
+    auto collider_ptr = std::make_shared<Sprite>(sf::Vector2f(400.f, 400.f), 100.f, 100.f);
+    
+    bool result = mSprite.checkCollision(collider_ptr);
+
+    ASSERT_FALSE(result);
+}
+
+TEST(CollisionTest, HorizontalEdges)
+{
+    Sprite mSprite(sf::Vector2f(200.f, 200.f), 600.f, 100.f);
+    auto collider_ptr = std::make_shared<Sprite>(sf::Vector2f(250.f, 50.f), 20.f, 600.f);
+    
+    bool result = mSprite.checkCollision(collider_ptr);
+
+    ASSERT_TRUE(result);
+}
+
+TEST(CollisionTest, VerticalEdges)
+{
+    Sprite mSprite(sf::Vector2f(200.f, 200.f), 20.f, 600.f);
+    auto collider_ptr = std::make_shared<Sprite>(sf::Vector2f(50.f, 300.f), 600.f, 20.f);
+    
+    bool result = mSprite.checkCollision(collider_ptr);
+
+    ASSERT_TRUE(result);
+}
+
 
 /*________________________ MOVEABLE class ________________________________________*/
 
