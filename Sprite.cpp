@@ -1,9 +1,17 @@
 #include "Headers/Sprite.hpp"
 
-Sprite::Sprite(sf::Vector2f position, float const width, float const height, sf::Color color)
+Sprite::Sprite(sf::Vector2f position, float const width, float const height)
     : position_(position)
     , width_(width)
     , height_(height)
+{
+    rectangle_.setFillColor(sf::Color::Green);
+    rectangle_.setSize(sf::Vector2f(width_, height_));
+    rectangle_.setPosition(position_);
+};
+
+Sprite::Sprite(sf::Vector2f position, float const width, float const height, sf::Color color)
+    : Sprite(position, width, height)
 {
     rectangle_.setFillColor(color);
     rectangle_.setSize(sf::Vector2f(width_, height_));
