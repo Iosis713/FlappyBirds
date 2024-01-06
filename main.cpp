@@ -13,7 +13,7 @@ int main()
     Sprite testSprite(sf::Vector2f(800.f, 350.f), 50.f, 80.f, sf::Color::Magenta);
     
     Moveable testMoveable(sf::Vector2f(400.f, 200.f), 30.f, 70.f);
-
+    testMoveable.setVelocity(sf::Vector2f(5.0, 0.0));
     while(window.isOpen())
     {
         sf::Event event;
@@ -28,9 +28,10 @@ int main()
         }
         window.clear();
 
+        testMoveable.updatePosition();
+
         testSprite.draw(window);
         testMoveable.draw(window);
-
         window.display();
         {
             using namespace std::chrono_literals;
