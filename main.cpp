@@ -12,7 +12,7 @@ int main()
 
     Sprite testSprite(sf::Vector2f(800.f, 350.f), 50.f, 80.f, sf::Color::Magenta);
     
-    Sprite testSprite_2(sf::Vector2f(400.f, 200.f), 30.f, 70.f);
+    Moveable testMoveable(sf::Vector2f(400.f, 200.f), 30.f, 70.f);
 
     while(window.isOpen())
     {
@@ -29,7 +29,7 @@ int main()
         window.clear();
 
         testSprite.draw(window);
-        testSprite_2.draw(window);
+        testMoveable.draw(window);
 
         window.display();
         {

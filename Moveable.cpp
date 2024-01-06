@@ -8,12 +8,18 @@ Moveable::Moveable(sf::Vector2f position, float const width, float const height,
     : Sprite(position, width, height, color)
 {};
 
+sf::Vector2f Moveable::getVelocity() const
+{
+    return this-> velocity_;
+};
+
 void Moveable::setVelocity(sf::Vector2f velocity)
 {
     velocity_ = velocity;
 };
 
-sf::Vector2f Moveable::getVelocity() const
+void Moveable::updatePosition()
 {
-    return this-> velocity_;
-};
+    position_ += velocity_;
+}
+
