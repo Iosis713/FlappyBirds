@@ -11,10 +11,11 @@ set(SFML_LIB    sfml-graphics
                 sfml-window
                 sfml-system)
 
-set(SRC         Sprite.cpp)
+set(SRC         Sprite.cpp
+                Moveable.cpp
+                Controllable.cpp)
 
-add_library(commonLibrary STATIC  Sprite.cpp
-                                  Moveable.cpp)
+add_library(commonLibrary STATIC  ${SRC})
 
 add_executable(TestRunner   testRunner.cpp)
 target_link_libraries(TestRunner PRIVATE    ${GTEST_LIBRARIES}

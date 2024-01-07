@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "Headers/Sprite.hpp"
 #include "Headers/Moveable.hpp"
+#include "Headers/Controllable.hpp"
 
 int main()
 {
@@ -14,6 +15,13 @@ int main()
     
     Moveable testMoveable(sf::Vector2f(400.f, 200.f), 30.f, 70.f);
     testMoveable.setVelocity(sf::Vector2f(5.0, 0.0));
+    
+    Controllable testControllable(sf::Vector2f(500.f, 500.f), 40.f, 40.f, sf::Color::Blue);
+    testControllable.setGravityStatus(true);
+
+    //unsigned deltaTime;
+    //std::chrono::time_point<std::chrono::steady_clock> previousTime = std::chrono::steady_clock::now();
+
     while(window.isOpen())
     {
         sf::Event event;
@@ -27,15 +35,28 @@ int main()
             }
         }
         window.clear();
+        
+        //previousTime = std::chrono::steady_clock::now();
 
-        testMoveable.updatePosition();
+        /*do{
+            testControllable.jump();
+            deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousTime).count(); 
+        }while(FRAME_DURATION > deltaTime);
+        */
 
+        testControllable.jump();
+        testControllable.updatePosition();
+        testControllable.draw(window);
+        
         testSprite.draw(window);
+        
+        testMoveable.updatePosition();
         testMoveable.draw(window);
+        
         window.display();
         {
             using namespace std::chrono_literals;
-            std::this_thread::sleep_for(20ms);
+            std::this_thread::sleep_for(50ms);
         }   
     }
 
