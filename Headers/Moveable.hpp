@@ -13,15 +13,12 @@ protected:
 
 public:
     Moveable(sf::Vector2f position, float const width, float const height);
-    Moveable(sf::Vector2f position, float const width, float const height, sf::Color color);
     Moveable(sf::Vector2f position, float const width, float const height, sf::Vector2f velocity);
-    Moveable(sf::Vector2f position, float const width, float const height, sf::Color color, sf::Vector2f velocity);
-
     sf::Vector2f getVelocity() const;
     
     void setGravityStatus(bool status);
     void setVelocity(sf::Vector2f velocity);
-       
+    void draw(sf::RenderWindow& i_window) override;  
     void updatePosition();
 };
 

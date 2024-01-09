@@ -4,10 +4,15 @@ Controllable::Controllable(sf::Vector2f position, float const width, float const
     : Moveable(position, width, height)
 {};
 
-Controllable::Controllable(sf::Vector2f position, float const width, float const height, sf::Color color)
-    : Moveable(position, width, height, color)
-{};
+void Controllable::draw(sf::RenderWindow& i_window)
+{
+    sf::RectangleShape rectangle_;
+    rectangle_.setFillColor(sf::Color::Magenta);
+    rectangle_.setSize(sf::Vector2f(width_, height_));
+    rectangle_.setPosition(position_);
 
+    i_window.draw(rectangle_);
+}
 
 void Controllable::jump()
 {

@@ -12,7 +12,7 @@ class SpriteFixture : public testing::TestWithParam<sf::Vector2f>
 {
 public:
 protected:
-    Sprite mSprite{sf::Vector2f(50.f, 100.f), 20.f, 100.f, sf::Color::Red};
+    Sprite mSprite{sf::Vector2f(50.f, 100.f), 20.f, 100.f};
 };
 
 TEST_P(SpriteFixture, TestSetPosition)

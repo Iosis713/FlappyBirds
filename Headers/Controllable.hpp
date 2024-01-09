@@ -17,7 +17,9 @@ protected:
 
 public:
     Controllable(sf::Vector2f position, float const width, float const height);
-    Controllable(sf::Vector2f position, float const width, float const height, sf::Color color);
+    
+    void draw(sf::RenderWindow& i_window) override;
     void jump();
+
 };
 

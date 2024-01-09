@@ -4,17 +4,8 @@ Moveable::Moveable(sf::Vector2f position, float const width, float const height)
     : Sprite(position, width, height)
 {};
 
-Moveable::Moveable(sf::Vector2f position, float const width, float const height, sf::Color color)
-    : Sprite(position, width, height, color)
-{};
-
 Moveable::Moveable(sf::Vector2f position, float const width, float const height, sf::Vector2f velocity)
     : Sprite(position, width, height)
-    , velocity_(velocity)
-{};
-
-Moveable::Moveable(sf::Vector2f position, float const width, float const height, sf::Color color, sf::Vector2f velocity)
-    : Sprite(position, width, height, color)
     , velocity_(velocity)
 {};
 
@@ -33,6 +24,16 @@ void Moveable::setVelocity(sf::Vector2f velocity)
     velocity_ = velocity;
 };
 
+void Moveable::draw(sf::RenderWindow& i_window)
+{
+    sf::RectangleShape rectangle_;
+    rectangle_.setFillColor(sf::Color::Red);
+    rectangle_.setSize(sf::Vector2f(width_, height_));
+    rectangle_.setPosition(position_);
+
+    i_window.draw(rectangle_);
+}
+
 void Moveable::updatePosition()
 {
     if(gravityStatus_)
@@ -41,5 +42,6 @@ void Moveable::updatePosition()
     }
 
     position_ += velocity_;
+    updateVertexes();
 }
 

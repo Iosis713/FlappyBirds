@@ -12,17 +12,6 @@ Sprite::Sprite(sf::Vector2f position, float const width, float const height)
     rectangle_.setPosition(position_);
 };
 
-Sprite::Sprite(sf::Vector2f position, float const width, float const height, sf::Color color)
-    : Sprite(position, width, height)
-{
-    updateVertexes();
-
-    rectangle_.setFillColor(color);
-    rectangle_.setSize(sf::Vector2f(width_, height_));
-    rectangle_.setPosition(position_);
-};
-
-
 bool Sprite::checkCollision(std::shared_ptr<Sprite> const checkedSprite)
 {
     //checking of main object vertexes collision
@@ -96,7 +85,11 @@ bool Sprite::checkCollision(std::shared_ptr<Sprite> const checkedSprite)
 
 void Sprite::draw(sf::RenderWindow& i_window)
 {
+    sf::RectangleShape rectangle_;
+    rectangle_.setFillColor(sf::Color::Yellow);
+    rectangle_.setSize(sf::Vector2f(width_, height_));
     rectangle_.setPosition(position_);
+
     i_window.draw(rectangle_);
 }
 

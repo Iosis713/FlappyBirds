@@ -11,12 +11,12 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "FlappyBirds");
 
-    Sprite testSprite(sf::Vector2f(800.f, 350.f), 50.f, 80.f, sf::Color::Magenta);
+    Sprite testSprite(sf::Vector2f(800.f, 350.f), 50.f, 80.f);
     
     Moveable testMoveable(sf::Vector2f(400.f, 200.f), 30.f, 70.f);
     testMoveable.setVelocity(sf::Vector2f(5.0, 0.0));
     
-    Controllable testControllable(sf::Vector2f(500.f, 500.f), 40.f, 40.f, sf::Color::Blue);
+    Controllable testControllable(sf::Vector2f(500.f, 500.f), 40.f, 40.f);
     testControllable.setGravityStatus(true);
 
     //unsigned deltaTime;
