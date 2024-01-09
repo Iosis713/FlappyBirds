@@ -18,7 +18,7 @@ protected:
 
 public:
     Sprite(sf::Vector2f position, float const width, float const height);
- 
+    
     bool getCollisionStatus();
     float getHeight() const;
     float getWidth() const;

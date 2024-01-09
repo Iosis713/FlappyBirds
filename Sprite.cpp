@@ -6,10 +6,6 @@ Sprite::Sprite(sf::Vector2f position, float const width, float const height)
     , height_(height)
 {
     updateVertexes();
-
-    rectangle_.setFillColor(sf::Color::Green);
-    rectangle_.setSize(sf::Vector2f(width_, height_));
-    rectangle_.setPosition(position_);
 };
 
 bool Sprite::checkCollision(std::shared_ptr<Sprite> const checkedSprite)
@@ -85,11 +81,10 @@ bool Sprite::checkCollision(std::shared_ptr<Sprite> const checkedSprite)
 
 void Sprite::draw(sf::RenderWindow& i_window)
 {
-    sf::RectangleShape rectangle_;
+    sf::RectangleShape rectangle_(position_);
     rectangle_.setFillColor(sf::Color::Yellow);
     rectangle_.setSize(sf::Vector2f(width_, height_));
     rectangle_.setPosition(position_);
-
     i_window.draw(rectangle_);
 }
 
