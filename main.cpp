@@ -6,6 +6,7 @@
 #include "Headers/Sprite.hpp"
 #include "Headers/Moveable.hpp"
 #include "Headers/Controllable.hpp"
+#include "Headers/Pipes.hpp"
 
 int main()
 {
@@ -18,6 +19,8 @@ int main()
     
     Controllable testControllable(sf::Vector2f(500.f, 500.f), 40.f, 40.f);
     testControllable.setGravityStatus(true);
+
+    std::shared_ptr<Pipes> testPipes_ptr = std::make_shared<Pipes>(sf::Vector2f(1000.f, 600.f), 100.f, 600.f);    
 
     //unsigned deltaTime;
     //std::chrono::time_point<std::chrono::steady_clock> previousTime = std::chrono::steady_clock::now();
@@ -46,6 +49,7 @@ int main()
 
         testControllable.jump();
         testControllable.updatePosition();
+        testControllable.checkCollision(testPipes_ptr);
         testControllable.draw(window);
         
         testSprite.draw(window);
@@ -53,6 +57,9 @@ int main()
         testMoveable.updatePosition();
         testMoveable.draw(window);
         
+        testPipes_ptr->updatePosition();
+        testPipes_ptr->draw(window);
+
         window.display();
         {
             using namespace std::chrono_literals;

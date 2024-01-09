@@ -81,7 +81,7 @@ bool Sprite::checkCollision(std::shared_ptr<Sprite> const checkedSprite)
 
 void Sprite::draw(sf::RenderWindow& i_window)
 {
-    sf::RectangleShape rectangle_(position_);
+    //sf::RectangleShape rectangle_;
     rectangle_.setFillColor(sf::Color::Yellow);
     rectangle_.setSize(sf::Vector2f(width_, height_));
     rectangle_.setPosition(position_);

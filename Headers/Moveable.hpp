@@ -19,6 +19,6 @@ public:
     void setGravityStatus(bool status);
     void setVelocity(sf::Vector2f velocity);
     void draw(sf::RenderWindow& i_window) override;  
-    void updatePosition();
+    void virtual updatePosition();
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Moveable.hpp"
+#include "Pipes.hpp"
 #include <chrono>
 #include <thread>
 
@@ -17,7 +18,8 @@ protected:
 
 public:
     Controllable(sf::Vector2f position, float const width, float const height);
-    
+
+    bool checkCollision(std::shared_ptr<Pipes> const checkedSprite);
     void draw(sf::RenderWindow& i_window) override;
     void jump();
 

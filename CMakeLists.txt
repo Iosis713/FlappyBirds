@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 project(FlappyBirds)
+
 set(CXX_STANDARD_REQUIRED 20)
 find_package(GTest REQUIRED)
 
@@ -13,7 +14,8 @@ set(SFML_LIB    sfml-graphics
 
 set(SRC         Sprite.cpp
                 Moveable.cpp
-                Controllable.cpp)
+                Controllable.cpp
+                Pipes.cpp)
 
 add_library(commonLibrary STATIC  ${SRC})
 
@@ -28,9 +30,14 @@ add_executable(FlappyBirds  main.cpp)
 target_link_libraries(FlappyBirds PRIVATE   ${SFML_LIB}
                                             commonLibrary)
 
+target_compile_options(commonLibrary PRIVATE ${FLAGS})
 target_compile_options(TestRunner PRIVATE ${FLAGS})
 target_compile_options(FlappyBirds PRIVATE ${FLAGS})
-target_compile_options(commonLibrary PRIVATE ${FLAGS})
+
+
+set_target_properties(commonLibrary     PROPERTIES
+                                        CXX_STANDARD 20
+                                        CXX_STANDARD_REQUIRED ON)
 
 set_target_properties(TestRunner    PROPERTIES
                                     CXX_STANDARD 20
@@ -39,8 +46,4 @@ set_target_properties(TestRunner    PROPERTIES
 set_target_properties(FlappyBirds   PROPERTIES
                                     CXX_STANDARD 20
                                     CXX_STANDARD_REQUIRED ON)
-
-set_target_properties(commonLibrary     PROPERTIES
-                                        CXX_STANDARD 20
-                                        CXX_STANDARD_REQUIRED ON)
 

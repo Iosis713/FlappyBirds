@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-
+#include <SFML/Graphics.hpp>
 #include "Headers/Sprite.hpp"
 #include "Headers/Moveable.hpp"
 

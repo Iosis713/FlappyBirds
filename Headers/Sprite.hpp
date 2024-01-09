@@ -30,6 +30,6 @@ public:
     
     bool checkCollision(std::shared_ptr<Sprite> checkedSprite);
     virtual void draw(sf::RenderWindow& i_window);
-    void updateVertexes();
+    virtual void updateVertexes();
 };
 
