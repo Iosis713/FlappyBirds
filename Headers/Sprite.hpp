@@ -29,6 +29,7 @@ public:
     void setCollisionStatus(bool status);
     
     bool checkCollision(std::shared_ptr<Sprite> checkedSprite);
+    bool checkMapBoundaryCollision();
     virtual void draw(sf::RenderWindow& i_window);
     virtual void updateVertexes();
 };

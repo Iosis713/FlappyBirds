@@ -79,6 +79,24 @@ bool Sprite::checkCollision(std::shared_ptr<Sprite> const checkedSprite)
     }
 }
 
+bool Sprite::checkMapBoundaryCollision()
+{
+    //top boundary
+    if(position_.y <= 0.0 or
+       position_.y >= (static_cast<float>(SCREEN_HEIGHT) - height_)   or
+       position_.x <= 0.0 or
+       position_.x >= (static_cast<float>(SCREEN_HEIGHT) - width_))
+    {
+        collisionStatus_ = true;
+    }
+    else
+    {
+        collisionStatus_ = false;
+    }
+    return collisionStatus_;
+}
+
+
 void Sprite::draw(sf::RenderWindow& i_window)
 {
     //sf::RectangleShape rectangle_;
@@ -99,7 +117,9 @@ void Sprite::updateVertexes()
 /*___________________________________GETTERS______________________________*/
 
 bool Sprite::getCollisionStatus()
-{
+{   
+    std::cout << std::boolalpha;
+    std::cout << "Collision status = " << collisionStatus_ << '\n';
     return this-> collisionStatus_;
 }
 

@@ -138,8 +138,6 @@ bool Controllable::checkCollision(std::shared_ptr<Pipes> const checkedSprite)
     {
         collisionStatus_ = false;
     }
-    
-    std::cout << "CollisionStatus = " << collisionStatus_ << '\n';
     return collisionStatus_;
 }
 

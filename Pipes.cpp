@@ -3,7 +3,7 @@
 Pipes::Pipes(sf::Vector2f position, float const width, float const height)
     : Moveable(position, width, height)
 {
-    setVelocity(sf::Vector2f(-5.0f, 0.0f));
+    setVelocity(sf::Vector2f(-10.0f, 0.0f));
 };
 
 void Pipes::draw(sf::RenderWindow& i_window)

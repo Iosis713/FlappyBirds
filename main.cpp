@@ -50,6 +50,8 @@ int main()
         testControllable.jump();
         testControllable.updatePosition();
         testControllable.checkCollision(testPipes_ptr);
+        testControllable.checkMapBoundaryCollision();
+        testControllable.getCollisionStatus();
         testControllable.draw(window);
         
         testSprite.draw(window);
