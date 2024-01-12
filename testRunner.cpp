@@ -15,13 +15,26 @@ protected:
     Sprite mSprite{sf::Vector2f(50.f, 100.f), 20.f, 100.f};
 };
 
-TEST_P(SpriteFixture, TestSetPosition)
+TEST_P(SpriteFixture, TestingSetPosition)
 {
     sf::Vector2f param = GetParam();
 
     mSprite.setPosition(param);
 
     ASSERT_EQ(mSprite.getPosition(), param);
+
+    TearDown();
+}
+
+TEST_P(SpriteFixture, TestingMapColision)
+{
+    sf::Vector2f param = GetParam();
+
+    mSprite.setPosition(param);
+
+    ASSERT_TRUE(mSprite.checkMapBoundaryCollision());
+
+    TearDown();
 }
 
 TEST_F(SpriteFixture, vertexesUpdateTest)
@@ -37,9 +50,15 @@ TEST_F(SpriteFixture, vertexesUpdateTest)
     ASSERT_EQ(expectedVertexes, mSprite.getVertexes());
 }
 
-INSTANTIATE_TEST_CASE_P(TestingSetPosition, SpriteFixture, testing::Values(sf::Vector2f(20, 30),
-                                                        sf::Vector2f(60, -10),
-                                                        sf::Vector2f(-20, -30)));
+INSTANTIATE_TEST_CASE_P(TestingMapCollision, SpriteFixture, testing::Values(
+                                                        sf::Vector2f(0.0f, 0.1f), //vertex
+                                                        sf::Vector2f(-1.5f, 700.f), //left side
+                                                        sf::Vector2f(SCREEN_WIDTH - 47.3, 700.f), // right side
+                                                        sf::Vector2f(500.f, -0.73f), // top side
+                                                        sf::Vector2f(500.f, SCREEN_HEIGHT - 99.1f), // bottom side
+                                                        sf::Vector2f(SCREEN_WIDTH -50.f, SCREEN_HEIGHT - 100.f), // right bottom vertex
+                                                        sf::Vector2f(0.0f, SCREEN_HEIGHT - 100.f), // left bottom vertex
+                                                        sf::Vector2f(SCREEN_WIDTH - 50.f, 0.0f)));
 
 TEST(CollisionTest, LeftTopVertexInteracting)
 {

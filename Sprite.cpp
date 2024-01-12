@@ -89,6 +89,10 @@ bool Sprite::checkMapBoundaryCollision()
     {
         collisionStatus_ = true;
     }
+    else if(position_ == sf::Vector2f(0.0f, 0.0f))
+    {
+        collisionStatus_ = true;
+    }
     else
     {
         collisionStatus_ = false;
