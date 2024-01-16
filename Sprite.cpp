@@ -122,9 +122,7 @@ void Sprite::updateVertexes()
 
 bool Sprite::getCollisionStatus()
 {   
-    std::cout << std::boolalpha;
-    std::cout << "Collision status = " << collisionStatus_ << '\n';
-    return this-> collisionStatus_;
+   return this-> collisionStatus_;
 }
 
 float Sprite::getHeight() const

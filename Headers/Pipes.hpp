@@ -1,21 +1,29 @@
 #pragma once
 
+#include <random>
+
 #include "Moveable.hpp"
 
 class Pipes : public Moveable
 {
 protected:
-    unsigned short const pipesClearance_ = 400;
+    const int maximumYPosition_ = SCREEN_HEIGHT - 150;
+    const int pipesClearance_ = 300;
+    const int minimumYPosition_ = 150 + pipesClearance_;
     std::array<sf::Vector2f, 4> topVertex_;// 0 -leftTop, 1 - rightTop, 2 -leftBottom, 3-rightBottom
 public:
 
     Pipes(sf::Vector2f position, float const width, float const height);
     
-
+    
     void draw(sf::RenderWindow& i_window) override;
     void updateVertexes() override;
     void updatePosition() override;
-    unsigned short getPipesClearance() const;   
+    
+    int getRandom();
+    int getPipesClearance() const;   
     std::array<sf::Vector2f, 4> getTopVertexes() const;
+    
+
 };
 

@@ -4,141 +4,141 @@ Controllable::Controllable(sf::Vector2f position, float const width, float const
     : Moveable(position, width, height)
 {};
 
-bool Controllable::checkCollision(std::shared_ptr<Pipes> const checkedSprite)
+bool Controllable::checkCollision(Pipes& checkedSprite)  
 {
     //checking of main object vertexes collision
     //left top vertex of the main object penetration
-    if( (vertex_[0].x >= checkedSprite->getVertexes()[0].x) &&
-        (vertex_[0].x <= checkedSprite->getVertexes()[1].x) &&
-        (vertex_[0].y >= checkedSprite->getVertexes()[0].y) &&
-        (vertex_[0].y <= checkedSprite->getVertexes()[2].y))
+    if( (vertex_[0].x >= checkedSprite.getVertexes()[0].x) &&
+        (vertex_[0].x <= checkedSprite.getVertexes()[1].x) &&
+        (vertex_[0].y >= checkedSprite.getVertexes()[0].y) &&
+        (vertex_[0].y <= checkedSprite.getVertexes()[2].y))
     {   
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //right top vertex of the main object penetration
-    else if((vertex_[1].x >= checkedSprite->getVertexes()[0].x) &&
-            (vertex_[1].x <= checkedSprite->getVertexes()[1].x) &&
-            (vertex_[1].y >= checkedSprite->getVertexes()[0].y) &&
-            (vertex_[1].y <= checkedSprite->getVertexes()[2].y))
+    else if((vertex_[1].x >= checkedSprite.getVertexes()[0].x) &&
+            (vertex_[1].x <= checkedSprite.getVertexes()[1].x) &&
+            (vertex_[1].y >= checkedSprite.getVertexes()[0].y) &&
+            (vertex_[1].y <= checkedSprite.getVertexes()[2].y))
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //left bottom vertex of the main object penetration
-    else if((vertex_[2].x >= checkedSprite->getVertexes()[0].x) &&
-            (vertex_[2].x <= checkedSprite->getVertexes()[1].x) &&
-            (vertex_[2].y >= checkedSprite->getVertexes()[0].y) &&
-            (vertex_[2].y <= checkedSprite->getVertexes()[2].y))
+    else if((vertex_[2].x >= checkedSprite.getVertexes()[0].x) &&
+            (vertex_[2].x <= checkedSprite.getVertexes()[1].x) &&
+            (vertex_[2].y >= checkedSprite.getVertexes()[0].y) &&
+            (vertex_[2].y <= checkedSprite.getVertexes()[2].y))
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //right bottom vertex of the main object penetration
-    else if((vertex_[3].x >= checkedSprite->getVertexes()[0].x) &&
-            (vertex_[3].x <= checkedSprite->getVertexes()[1].x) &&
-            (vertex_[3].y >= checkedSprite->getVertexes()[0].y) &&
-            (vertex_[3].y <= checkedSprite->getVertexes()[2].y))
+    else if((vertex_[3].x >= checkedSprite.getVertexes()[0].x) &&
+            (vertex_[3].x <= checkedSprite.getVertexes()[1].x) &&
+            (vertex_[3].y >= checkedSprite.getVertexes()[0].y) &&
+            (vertex_[3].y <= checkedSprite.getVertexes()[2].y))
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //checking of the main objects intersection (event without vertexes inside)
-    else if((((vertex_[0].y >= checkedSprite->getVertexes()[0].y) &&
-              (vertex_[0].y <= checkedSprite->getVertexes()[2].y)) //upper edge 
+    else if((((vertex_[0].y >= checkedSprite.getVertexes()[0].y) &&
+              (vertex_[0].y <= checkedSprite.getVertexes()[2].y)) //upper edge 
                 or
-             ((vertex_[2].y >= checkedSprite->getVertexes()[0].y) &&
-              (vertex_[2].y <= checkedSprite->getVertexes()[2].y))) //bottom edge
+             ((vertex_[2].y >= checkedSprite.getVertexes()[0].y) &&
+              (vertex_[2].y <= checkedSprite.getVertexes()[2].y))) //bottom edge
                 and
-             (((checkedSprite->getVertexes()[0].x >= vertex_[0].x) &&
-              (checkedSprite->getVertexes()[1].x <= vertex_[1].x)) // left edge of collider
+             (((checkedSprite.getVertexes()[0].x >= vertex_[0].x) &&
+              (checkedSprite.getVertexes()[1].x <= vertex_[1].x)) // left edge of collider
                 or
-             ((checkedSprite->getVertexes()[1].x >= vertex_[0].x) &&
-              (checkedSprite->getVertexes()[1].x <= vertex_[1].x)))) // right edge of collider
+             ((checkedSprite.getVertexes()[1].x >= vertex_[0].x) &&
+              (checkedSprite.getVertexes()[1].x <= vertex_[1].x)))) // right edge of collider
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //main object vertical edges (changes checkedSprite with main object)
-    else if((((vertex_[0].x >= checkedSprite->getVertexes()[0].x) &&
-              (vertex_[0].x <= checkedSprite->getVertexes()[1].x)) //left edge
+    else if((((vertex_[0].x >= checkedSprite.getVertexes()[0].x) &&
+              (vertex_[0].x <= checkedSprite.getVertexes()[1].x)) //left edge
                 or
-             ((vertex_[1].x >= checkedSprite->getVertexes()[0].x) &&
-              (vertex_[1].x <= checkedSprite->getVertexes()[1].x))) //right edge
+             ((vertex_[1].x >= checkedSprite.getVertexes()[0].x) &&
+              (vertex_[1].x <= checkedSprite.getVertexes()[1].x))) //right edge
                 and
-            (((checkedSprite->getVertexes()[0].y >= vertex_[0].y) &&
-              (checkedSprite->getVertexes()[0].y <= vertex_[2].y)) //top edge of collider
+            (((checkedSprite.getVertexes()[0].y >= vertex_[0].y) &&
+              (checkedSprite.getVertexes()[0].y <= vertex_[2].y)) //top edge of collider
                 or
-             ((checkedSprite->getVertexes()[2].y >= vertex_[0].y) &&
-              (checkedSprite->getVertexes()[2].y <= vertex_[2].y)))) //bottom edge of collider
+             ((checkedSprite.getVertexes()[2].y >= vertex_[0].y) &&
+              (checkedSprite.getVertexes()[2].y <= vertex_[2].y)))) //bottom edge of collider
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
 
     //_________________________TOP PIPES_____________________________________________//
     
 
-    else if( (vertex_[0].x >= checkedSprite->getTopVertexes()[0].x) &&
-        (vertex_[0].x <= checkedSprite->getTopVertexes()[1].x) &&
-        (vertex_[0].y >= checkedSprite->getTopVertexes()[0].y) &&
-        (vertex_[0].y <= checkedSprite->getTopVertexes()[2].y))
+    else if( (vertex_[0].x >= checkedSprite.getTopVertexes()[0].x) &&
+        (vertex_[0].x <= checkedSprite.getTopVertexes()[1].x) &&
+        (vertex_[0].y >= checkedSprite.getTopVertexes()[0].y) &&
+        (vertex_[0].y <= checkedSprite.getTopVertexes()[2].y))
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //right top vertex of the main object penetration
-    else if((vertex_[1].x >= checkedSprite->getTopVertexes()[0].x) &&
-            (vertex_[1].x <= checkedSprite->getTopVertexes()[1].x) &&
-            (vertex_[1].y >= checkedSprite->getTopVertexes()[0].y) &&
-            (vertex_[1].y <= checkedSprite->getTopVertexes()[2].y))
+    else if((vertex_[1].x >= checkedSprite.getTopVertexes()[0].x) &&
+            (vertex_[1].x <= checkedSprite.getTopVertexes()[1].x) &&
+            (vertex_[1].y >= checkedSprite.getTopVertexes()[0].y) &&
+            (vertex_[1].y <= checkedSprite.getTopVertexes()[2].y))
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //left bottom vertex of the main object penetration
-    else if((vertex_[2].x >= checkedSprite->getTopVertexes()[0].x) &&
-            (vertex_[2].x <= checkedSprite->getTopVertexes()[1].x) &&
-            (vertex_[2].y >= checkedSprite->getTopVertexes()[0].y) &&
-            (vertex_[2].y <= checkedSprite->getTopVertexes()[2].y))
+    else if((vertex_[2].x >= checkedSprite.getTopVertexes()[0].x) &&
+            (vertex_[2].x <= checkedSprite.getTopVertexes()[1].x) &&
+            (vertex_[2].y >= checkedSprite.getTopVertexes()[0].y) &&
+            (vertex_[2].y <= checkedSprite.getTopVertexes()[2].y))
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //right bottom vertex of the main object penetration
-    else if((vertex_[3].x >= checkedSprite->getTopVertexes()[0].x) &&
-            (vertex_[3].x <= checkedSprite->getTopVertexes()[1].x) &&
-            (vertex_[3].y >= checkedSprite->getTopVertexes()[0].y) &&
-            (vertex_[3].y <= checkedSprite->getTopVertexes()[2].y))
+    else if((vertex_[3].x >= checkedSprite.getTopVertexes()[0].x) &&
+            (vertex_[3].x <= checkedSprite.getTopVertexes()[1].x) &&
+            (vertex_[3].y >= checkedSprite.getTopVertexes()[0].y) &&
+            (vertex_[3].y <= checkedSprite.getTopVertexes()[2].y))
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //checking of the main objects intersection (event without vertexes inside)
-    else if((((vertex_[0].y >= checkedSprite->getTopVertexes()[0].y) &&
-              (vertex_[0].y <= checkedSprite->getTopVertexes()[2].y)) //upper edge 
+    else if((((vertex_[0].y >= checkedSprite.getTopVertexes()[0].y) &&
+              (vertex_[0].y <= checkedSprite.getTopVertexes()[2].y)) //upper edge 
                 or
-             ((vertex_[2].y >= checkedSprite->getTopVertexes()[0].y) &&
-              (vertex_[2].y <= checkedSprite->getTopVertexes()[2].y))) //bottom edge
+             ((vertex_[2].y >= checkedSprite.getTopVertexes()[0].y) &&
+              (vertex_[2].y <= checkedSprite.getTopVertexes()[2].y))) //bottom edge
                 and
-             (((checkedSprite->getTopVertexes()[0].x >= vertex_[0].x) &&
-              (checkedSprite->getTopVertexes()[1].x <= vertex_[1].x)) // left edge of collider
+             (((checkedSprite.getTopVertexes()[0].x >= vertex_[0].x) &&
+              (checkedSprite.getTopVertexes()[1].x <= vertex_[1].x)) // left edge of collider
                 or
-             ((checkedSprite->getTopVertexes()[1].x >= vertex_[0].x) &&
-              (checkedSprite->getTopVertexes()[1].x <= vertex_[1].x)))) // right edge of collider
+             ((checkedSprite.getTopVertexes()[1].x >= vertex_[0].x) &&
+              (checkedSprite.getTopVertexes()[1].x <= vertex_[1].x)))) // right edge of collider
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     //main object vertical edges (changes checkedSprite with main object)
-    else if((((vertex_[0].x >= checkedSprite->getTopVertexes()[0].x) &&
-              (vertex_[0].x <= checkedSprite->getTopVertexes()[1].x)) //left edge
+    else if((((vertex_[0].x >= checkedSprite.getTopVertexes()[0].x) &&
+              (vertex_[0].x <= checkedSprite.getTopVertexes()[1].x)) //left edge
                 or
-             ((vertex_[1].x >= checkedSprite->getTopVertexes()[0].x) &&
-              (vertex_[1].x <= checkedSprite->getTopVertexes()[1].x))) //right edge
+             ((vertex_[1].x >= checkedSprite.getTopVertexes()[0].x) &&
+              (vertex_[1].x <= checkedSprite.getTopVertexes()[1].x))) //right edge
                 and
-            (((checkedSprite->getTopVertexes()[0].y >= vertex_[0].y) &&
-              (checkedSprite->getTopVertexes()[0].y <= vertex_[2].y)) //top edge of collider
+            (((checkedSprite.getTopVertexes()[0].y >= vertex_[0].y) &&
+              (checkedSprite.getTopVertexes()[0].y <= vertex_[2].y)) //top edge of collider
                 or
-             ((checkedSprite->getTopVertexes()[2].y >= vertex_[0].y) &&
-              (checkedSprite->getTopVertexes()[2].y <= vertex_[2].y)))) //bottom edge of collider
+             ((checkedSprite.getTopVertexes()[2].y >= vertex_[0].y) &&
+              (checkedSprite.getTopVertexes()[2].y <= vertex_[2].y)))) //bottom edge of collider
     {
-        collisionStatus_ = true;
+        this->collisionStatus_ = true;
     }
     else
     {
-        collisionStatus_ = false;
+        this->collisionStatus_ = false;
     }
-    return collisionStatus_;
+    return this->collisionStatus_;
 }
 
 void Controllable::draw(sf::RenderWindow& i_window)

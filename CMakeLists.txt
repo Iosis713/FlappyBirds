@@ -15,7 +15,8 @@ set(SFML_LIB    sfml-graphics
 set(SRC         Sprite.cpp
                 Moveable.cpp
                 Controllable.cpp
-                Pipes.cpp)
+                Pipes.cpp
+                PipesManager.cpp)
 
 add_library(commonLibrary STATIC  ${SRC})
 

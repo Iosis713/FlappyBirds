@@ -1,9 +1,11 @@
 #include "Headers/Pipes.hpp"
 
+
+
 Pipes::Pipes(sf::Vector2f position, float const width, float const height)
     : Moveable(position, width, height)
 {
-    setVelocity(sf::Vector2f(-10.0f, 0.0f));
+    setVelocity(sf::Vector2f(-8.0f, 0.0f));
 };
 
 void Pipes::draw(sf::RenderWindow& i_window)
@@ -40,7 +42,15 @@ void Pipes::updatePosition()
     Pipes::updateVertexes();
 }
 
-unsigned short Pipes::getPipesClearance() const
+int Pipes::getRandom()
+{
+    std::random_device randDev;
+    std::mt19937 randGenerator(randDev());
+    std::uniform_int_distribution<int> distribution(minimumYPosition_, maximumYPosition_);
+    return distribution(randGenerator);
+}
+
+int Pipes::getPipesClearance() const
 {
     return this-> pipesClearance_;
 }
