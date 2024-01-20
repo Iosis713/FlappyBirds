@@ -5,7 +5,7 @@
 Pipes::Pipes(sf::Vector2f position, float const width, float const height)
     : Moveable(position, width, height)
 {
-    setVelocity(sf::Vector2f(-8.0f, 0.0f));
+    setVelocity(sf::Vector2f(-5.0f, 0.0f));
 };
 
 void Pipes::draw(sf::RenderWindow& i_window)
@@ -42,6 +42,11 @@ void Pipes::updatePosition()
     Pipes::updateVertexes();
 }
 
+bool Pipes::isGone()
+{
+    return this-> passedScreen;
+}
+
 int Pipes::getRandom()
 {
     std::random_device randDev;
@@ -59,4 +64,10 @@ std::array<sf::Vector2f, 4> Pipes::getTopVertexes() const
 {
     return this-> topVertex_;
 }
+
+void Pipes::setIsGone(bool status)
+{
+    passedScreen = status;
+}
+
 

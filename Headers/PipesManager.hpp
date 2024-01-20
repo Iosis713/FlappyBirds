@@ -2,27 +2,30 @@
 
 #include <vector>
 #include <memory>
+#include <algorithm>
 #include "Pipes.hpp"
 
 class PipesManager
 {
 protected:
-    std::vector<Pipes> manager_;
     unsigned short frameCounter_ = 0;
-    unsigned short framesLimit_ = 30;
+    unsigned short framesLimit_ = 60;
+    std::vector<Pipes> manager_;
+
 public:
     PipesManager();
+    ~PipesManager() = default;
 
     void drawAllPipes(sf::RenderWindow& i_window);
     void generatePipes();
     void increaseFrameCounter();
-    void reorganise();
     void initialize();
+    void reorganise();
+    void stopAllPipes();    
 
     unsigned short getFrameCounter();
     unsigned short getFramesLimit();
-    std::vector<Pipes> getPipes();
     size_t getManagerSize();
-
+    std::vector<Pipes> getPipes();
 };
 

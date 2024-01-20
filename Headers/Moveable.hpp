@@ -8,12 +8,14 @@ class Moveable : public Sprite
 {
 protected:
     sf::Vector2f velocity_;
-    const float gravity_ = 3.5f;
+    const float gravity_ = 1.5f;
     bool gravityStatus_ = false; //not required for blocks
 
 public:
     Moveable(sf::Vector2f position, float const width, float const height);
     Moveable(sf::Vector2f position, float const width, float const height, sf::Vector2f velocity);
+    ~Moveable() override = default;    
+
     sf::Vector2f getVelocity() const;
     
     void setGravityStatus(bool status);

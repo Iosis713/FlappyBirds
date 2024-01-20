@@ -4,6 +4,15 @@ Controllable::Controllable(sf::Vector2f position, float const width, float const
     : Moveable(position, width, height)
 {};
 
+//___________________________GETTERS_________________________________________________//
+
+bool Controllable::getIsAlive()
+{
+    return this->isAlive_;
+}
+
+//__________________________OTHER FUNCTIONS__________________________________________//
+
 bool Controllable::checkCollision(Pipes& checkedSprite)  
 {
     //checking of main object vertexes collision
@@ -14,6 +23,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
         (vertex_[0].y <= checkedSprite.getVertexes()[2].y))
     {   
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //right top vertex of the main object penetration
     else if((vertex_[1].x >= checkedSprite.getVertexes()[0].x) &&
@@ -22,6 +32,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
             (vertex_[1].y <= checkedSprite.getVertexes()[2].y))
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //left bottom vertex of the main object penetration
     else if((vertex_[2].x >= checkedSprite.getVertexes()[0].x) &&
@@ -30,6 +41,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
             (vertex_[2].y <= checkedSprite.getVertexes()[2].y))
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //right bottom vertex of the main object penetration
     else if((vertex_[3].x >= checkedSprite.getVertexes()[0].x) &&
@@ -38,6 +50,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
             (vertex_[3].y <= checkedSprite.getVertexes()[2].y))
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //checking of the main objects intersection (event without vertexes inside)
     else if((((vertex_[0].y >= checkedSprite.getVertexes()[0].y) &&
@@ -53,6 +66,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
               (checkedSprite.getVertexes()[1].x <= vertex_[1].x)))) // right edge of collider
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //main object vertical edges (changes checkedSprite with main object)
     else if((((vertex_[0].x >= checkedSprite.getVertexes()[0].x) &&
@@ -68,6 +82,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
               (checkedSprite.getVertexes()[2].y <= vertex_[2].y)))) //bottom edge of collider
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
 
     //_________________________TOP PIPES_____________________________________________//
@@ -79,6 +94,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
         (vertex_[0].y <= checkedSprite.getTopVertexes()[2].y))
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //right top vertex of the main object penetration
     else if((vertex_[1].x >= checkedSprite.getTopVertexes()[0].x) &&
@@ -87,6 +103,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
             (vertex_[1].y <= checkedSprite.getTopVertexes()[2].y))
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //left bottom vertex of the main object penetration
     else if((vertex_[2].x >= checkedSprite.getTopVertexes()[0].x) &&
@@ -95,6 +112,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
             (vertex_[2].y <= checkedSprite.getTopVertexes()[2].y))
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //right bottom vertex of the main object penetration
     else if((vertex_[3].x >= checkedSprite.getTopVertexes()[0].x) &&
@@ -103,6 +121,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
             (vertex_[3].y <= checkedSprite.getTopVertexes()[2].y))
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //checking of the main objects intersection (event without vertexes inside)
     else if((((vertex_[0].y >= checkedSprite.getTopVertexes()[0].y) &&
@@ -118,6 +137,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
               (checkedSprite.getTopVertexes()[1].x <= vertex_[1].x)))) // right edge of collider
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     //main object vertical edges (changes checkedSprite with main object)
     else if((((vertex_[0].x >= checkedSprite.getTopVertexes()[0].x) &&
@@ -133,6 +153,7 @@ bool Controllable::checkCollision(Pipes& checkedSprite)
               (checkedSprite.getTopVertexes()[2].y <= vertex_[2].y)))) //bottom edge of collider
     {
         this->collisionStatus_ = true;
+        isAlive_ = false;
     }
     else
     {
@@ -155,7 +176,7 @@ void Controllable::jump()
     if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) or
         sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         and 
-        jumpAbility_)
+        jumpAbility_ and isAlive_)
     {   
         if(velocity_.y - jumpVelocity_ > maximumNegativeVerticalVelocity_)
         {
